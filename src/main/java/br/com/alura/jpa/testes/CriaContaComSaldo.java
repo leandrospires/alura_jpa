@@ -14,9 +14,9 @@ public class CriaContaComSaldo {
 		
 		Conta conta = new Conta();
 		
-		conta.setTitular("Maria");
-		conta.setNumero(12345);
-		conta.setAgencia(54321);
+		conta.setTitular("Ana");
+		conta.setNumero(2222);
+		conta.setAgencia(3333);
 		conta.setSaldo(500.0);
 		
 		
@@ -24,9 +24,19 @@ public class CriaContaComSaldo {
 		
 		em.persist(conta);
 		
-		conta.setSaldo(200.0);
-		
 		em.getTransaction().commit();
+		em.close();
+		
+
+		EntityManager em2 = emf.createEntityManager();
+
+		System.out.println("Id Ativo: " + conta.getId());
+		conta.setSaldo(1225.0);
+		
+		em2.getTransaction().begin();
+		em2.merge(conta);
+		em2.getTransaction().commit();
+		
 	}
 	
 }

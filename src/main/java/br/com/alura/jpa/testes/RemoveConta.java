@@ -6,18 +6,18 @@ import javax.persistence.Persistence;
 
 import br.com.alura.jpa.modelo.Conta;
 
-public class AlteraSaldoConta1 {
+public class RemoveConta {
 	public static void main(String[] args) {
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("alura");
 		EntityManager em = emf.createEntityManager();
 		
-		Conta conta1 = em.find(Conta.class, 5L);
+		Conta conta = em.find(Conta.class, 6L);
 	
-		System.out.println("Titular: " + conta1.getTitular());
+		System.out.println("Titular: " + conta.getTitular());
 		
 		em.getTransaction().begin();
 		
-		conta1.setSaldo(444.0);
+		em.remove(conta);
 		
 		em.getTransaction().commit();
 }
